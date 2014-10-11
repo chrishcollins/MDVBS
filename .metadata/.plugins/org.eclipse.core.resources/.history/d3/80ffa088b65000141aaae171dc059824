@@ -1,0 +1,69 @@
+var camera = function(e){
+
+var mediaBtn = Ti.UI.createButton({
+		title: "Capture media",
+		bottom: "12dp"
+	});
+
+	var mediaView = Ti.UI.createView({
+		top: "12dp",
+		width: "300dp",
+		height: "300dp",
+		backgroundColor: "#FFCC00" //So that we can see the view area
+	});
+
+	var img;  //forward reference for the container for the image
+
+	mainWindow.add(mediaBtn);
+	mainWindow.add(mediaView);
+
+	//An object to hold camera callbacks
+	var gallery = {
+		onSuccess: function(e){
+			if(e.mediaType === Ti.Media.MEDIA_TYPE_PHOTO){ //Make sure it is a PHOTO that has been taken
+				
+				if(img){
+					//Image view exists; let's remove it before we add again
+					mediaView.remove(img);//
+				}
+				//e.media is a Blob representing the image
+				//we can plug it into the image property of a new imageView
+				img = Ti.UI.createImageView({
+					image: e.media,
+					zIndex: 0
+				});
+
+				//Add the photo taken to the mediaView view
+				//The photo will scale down to the view
+				mediaView.add(img);
+
+				//If you wanted, you could get more information about the size of the picture
+				//via the .size property of e.media
+
+			} else if(e.mediaType === Ti.Media.MEDIA_TYPE_VIDEO){
+				vid = Ti.Media.createVideoPlayer({
+					media: e.media
+				});
+				
+				//Add the video taken to the media view
+				mediaView.add(vid);
+			} else {
+				alert("This is not a photo or video");
+			}
+		},
+		onCancel: function(e){
+			alert("Action cancelled");
+		},
+		onError: function(e){
+			alert("An error occured with code: " + e.code);
+		}
+	};
+
+	mediaBtn.addEventListener("click", function(e){
+		Ti.Media.openPhotoGallery({
+			success: gallery.onSuccess,
+			cancel: gallery.onCancel,
+			error: gallery.onError
+		});
+	});
+};

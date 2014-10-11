@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.appcelerator.titanium.mobile.ui.ios.installer.launchConfigurationType">
+<booleanAttribute key="ATTR_MINIFY" value="true"/>
+<stringAttribute key="ATTR_PROJECT_NAME" value="HowIsTheWeather-master-2"/>
+<stringAttribute key="ATTR_TITANIUM_DEPLOY_TYPE" value="development"/>
+<stringAttribute key="appid" value="com.lis186.HowIsTheWeather"/>
+<stringAttribute key="certificate" value="Chris Collins (JVDY958YF3)"/>
+<stringAttribute key="debug_config" value="::1412796140056:10.0.0.10"/>
+<stringAttribute key="debug_hosts" value="10.0.0.10"/>
+<stringAttribute key="device_id" value="353848f794f39217d699648ef4e4c584b4114599"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/HowIsTheWeather-master-2"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<booleanAttribute key="org.eclipse.debug.core.capture_output" value="true"/>
+<booleanAttribute key="org.eclipse.debug.ui.ATTR_LAUNCH_IN_BACKGROUND" value="true"/>
+<stringAttribute key="process_factory_id" value="com.appcelerator.titanium.ui.logLevelFilteringProcessFactory"/>
+<stringAttribute key="sdk_version" value="8.0"/>
+<stringAttribute key="uuid" value="0F2846CD-AEBC-433B-AB99-7BFCE0A1B031"/>
+</launchConfiguration>

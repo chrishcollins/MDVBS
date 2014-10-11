@@ -1,0 +1,16 @@
+Ti.UI.setBackgroundColor('#000');
+
+var mainWin = Ti.UI.createWindow({});
+
+
+
+var mainView = Ti.UI.createScrollView({
+	backgroundImage: "images/beach.png",
+	showVerticalScrollIndicator: true
+});
+
+var needWeather = require('weather');
+var getOther = require('other.js');
+
+mainWin.add(mainView);
+mainWin.open();

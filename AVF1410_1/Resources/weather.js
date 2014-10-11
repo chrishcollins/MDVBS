@@ -14,7 +14,7 @@ var remoteResponse = function(e) {
 	if (Ti.Network.online) {
 		var json = JSON.parse(this.responseText);
 
-		var currentTemp = json.forecast.simpleforecast.forecastday[0].high.fahrenheit;
+		var hiTemp = json.forecast.simpleforecast.forecastday[0].high.fahrenheit;
 		var day = json.forecast.txt_forecast.forecastday[0].title;
 		var forecast = json.forecast.txt_forecast.forecastday[0].fcttext;
 		var weatherImage = json.forecast.txt_forecast.forecastday[0].icon_url;
@@ -28,7 +28,7 @@ var remoteResponse = function(e) {
 		var dayfourTitle = json.forecast.txt_forecast.forecastday[6].title;
 		var dayfourImage = json.forecast.txt_forecast.forecastday[4].icon_url;
 
-		var postDay = Ti.UI.createLabel({
+		var dayOne = Ti.UI.createLabel({
 			text : day,
 			font : {
 				fontSize : 30,
@@ -39,8 +39,8 @@ var remoteResponse = function(e) {
 			textAlign : 'center'
 		});
 
-		var dayTemp = Ti.UI.createLabel({
-			text : currentTemp + ' °',
+		var hiLo = Ti.UI.createLabel({
+			text : hiTemp + ' °',
 			color : '#fff',
 			top : '23%',
 			font : {
@@ -50,7 +50,7 @@ var remoteResponse = function(e) {
 			textAlign : 'center'
 		});
 
-		var postImage = Ti.UI.createImageView({
+		var dayOneImage = Ti.UI.createImageView({
 			image : weatherImage,
 			backgroundColor : '#fff',
 			borderRadius : 5,
@@ -61,7 +61,7 @@ var remoteResponse = function(e) {
 			imageAlign : 'center'
 		});
 
-		var postForecast = Ti.UI.createLabel({
+		var dayOneForecast = Ti.UI.createLabel({
 			text : forecast,
 			font : {
 				fontSize : 20,
@@ -210,10 +210,10 @@ var remoteResponse = function(e) {
 			imageAlign : 'center'
 		});
 
-		mainView.add(postImage);
-		mainView.add(postDay);
-		mainView.add(postForecast);
-		mainView.add(dayTemp);
+		mainView.add(dayOneImage);
+		mainView.add(dayOne);
+		mainView.add(dayOneForecast);
+		mainView.add(hiLo);
 		mainView.add(appNameView);
 		mainView.add(dayTwo);
 		mainView.add(dayTwoImage);
@@ -237,26 +237,7 @@ var remoteResponse = function(e) {
 	};
 };
 
-// Create a Button.
-var refresh = Ti.UI.createButton({
-	title : 'Refresh',
-	color: 'blue',
-	backgroundColor : '#fff',
-	borderColor : 'blue',
-	borderRadius : 5,
-	height : '5%',
-	width : '20%',
-	top : '92%',
-	left : '40%'
-});
 
-// Listen for click events.
-refresh.addEventListener('click', function() {
-	xhr.send();
-});
-
-// Add to the parent view.
-mainView.add(refresh);
 
 var remoteError = function(e) {
 	Ti.API.debug('Status: ' + this.status);

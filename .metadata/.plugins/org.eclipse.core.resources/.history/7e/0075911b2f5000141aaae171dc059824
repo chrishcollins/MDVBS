@@ -1,0 +1,69 @@
+Ti.UI.setBackgroundColor('#000');
+
+var mainWin = Ti.UI.createWindow({});
+
+var mainView = Ti.UI.createScrollView({
+	backgroundImage: "images/bluecircle.jpg",
+	showVerticalScrollIndicator: true
+});
+
+var needWeather = require('weather');
+
+
+
+// Create a Button.
+var takePicBtn = Ti.UI.createButton({
+	title : 'takePicBtn',
+	height : '5%',
+	width : '10%',
+	top : '90%',
+	left : '45%'
+});
+
+// Listen for click events.
+takePicBtn.addEventListener('click', function() {
+	alert('\'takePicBtn\' was clicked!');
+});
+
+// Add to the parent view.
+//parentView.add(takePicBtn);
+
+
+
+takePicBtn.addEventListener('click', function(e){
+	Ti.Media.showCamera({
+		saveToPhotoGallery: true,
+		allowEditing: true,
+		mediaTypes: [Ti.Media.MEDIA_TYPE_VIDEO,Ti.Media.MEDIA_TYPE_PHOTO],
+		success: function(e) {
+			if(e.mediaType === Ti.Media.MEDIA_TYPE_PHOTO) {
+				var img = Ti.UI.createImageView({
+					width: win.width,
+					height: win.height,
+					image: e.media
+				});
+				win.add(img);
+			} else {
+				alert("thought this was a photo but, it's:" + e.mediaType);
+			}
+		},
+		error: function(error) {
+			if (error.code === Ti.Media.NO_CAMERA) {
+				alert("please run this on a device");
+			} else {
+				alert("other error: " + error.code);
+			}
+		}
+	}); //closing showCamera
+}); //closing takePicBtn
+
+
+
+
+
+
+
+
+mainWin.add(mainView);
+mainView.add(takePicBtn);
+mainWin.open();

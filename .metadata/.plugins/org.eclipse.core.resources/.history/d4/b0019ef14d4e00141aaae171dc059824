@@ -1,0 +1,15 @@
+var myWeather = 'http://api.wunderground.com/api/c8aa6df478360a59/forecast/q/autoip.json';
+
+//create remote response
+var remoteResponse = function(e) {
+	if (Ti.Network.online) {
+		var json = JSON.parse(this.responseText);
+
+		var hiTemp = json.forecast.simpleforecast.forecastday[0].high.fahrenheit;
+		var loTemp = json.forecast.simpleforecast.forecastday[0].low.fahrenheit;
+		var humidity = json.forecast.simpleforecast.forecastday[0].avehumidity;
+		var dayconditions = json.forecast.simpleforecast.forecastday[0].conditions;
+		//var hiTemp = json.forecast.simpleforecast.forecastday[0].high.fahrenheit;
+		var day = json.forecast.txt_forecast.forecastday[0].title;
+		var forecast = json.forecast.txt_forecast.forecastday[0].fcttext;
+		var weatherImage = json.forecast.txt_forecast.forecastday[0].icon_url;
