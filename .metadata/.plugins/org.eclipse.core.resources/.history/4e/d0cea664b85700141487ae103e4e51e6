@@ -1,0 +1,36 @@
+var MapModule = require('ti.map');
+var geo = require('geo');
+
+function createMap() {
+	var mapview = MapModule.createView({
+		mapType : MapModule.NORMAL_TYPE,
+		animate : true,
+		region : {
+			latitude : lat,
+			longitude : lon,
+			latitudeDelta : 0.01,
+			longitudeDelta : 0.01
+		},
+		regionFit : true,
+		height : 200,
+		width : 300,
+		bottom : 50,
+		userLocation : true
+	});
+
+	return mapview;
+}
+
+function createAnnotation(){
+	var pin = MapModule.createAnnotation({
+		latitude : params.lat,
+		longitude : lon,
+		title : title,
+		pincolor : MapModule.ANNOTATION_RED,
+	});
+
+	return pin;
+}
+
+exports.createAnnotation = createAnnotation;
+exports.createMap = createMap; 

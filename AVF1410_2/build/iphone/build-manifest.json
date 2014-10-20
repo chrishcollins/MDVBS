@@ -1,9 +1,8 @@
 {
-	"target": "device",
-	"deployType": "test",
+	"target": "simulator",
+	"deployType": "development",
 	"iosSdkVersion": "8.0",
 	"deviceFamily": "universal",
-	"developerName": "Chris Collins (JVDY958YF3)",
 	"iosSdkPath": "/Users/chriscollins/Library/Application Support/Titanium/mobilesdk/osx/3.4.0.GA/iphone",
 	"tiCoreHash": "77157e1ffaec640cf559356a147b6a4c",
 	"modulesHash": "72219161f931aadf39b2f1901bb02175",
@@ -18,8 +17,8 @@
 	"description": "undefined",
 	"copyright": "2014 by chriscollins",
 	"guid": "a1219b73-2d73-4143-aa66-bb7c782952df",
-	"skipJSMinification": false,
+	"skipJSMinification": true,
 	"forceCopy": false,
 	"forceCopyAll": false,
-	"encryptJS": true
+	"encryptJS": false
 }

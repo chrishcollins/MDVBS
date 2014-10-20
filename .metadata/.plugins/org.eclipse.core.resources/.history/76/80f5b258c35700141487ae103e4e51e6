@@ -1,0 +1,36 @@
+function geo() {
+	//var status,	latitude, longitude;
+
+if (Ti.Geolocation.locationServicesEnabled) {
+    Titanium.Geolocation.purpose = 'Get Current Location';
+    Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
+    Titanium.Geolocation.getCurrentPosition(function(e) {
+        if (e.error) {
+            Ti.API.error('Error: ' + e.error);
+        } else {
+            Ti.API.info(e.coords);
+        }
+    });
+} else {
+    alert('Please enable location services');
+
+		geolocate(function (e) {
+			if (e.success) {
+				status = 'Location acquired';
+
+				latitude = e.location.latitude;
+				longitude = e.location.longitude;
+			}
+			else {
+				status = 'GPS lost';
+			}
+			callback({
+				status: status,
+				longitude: lon,
+				latitude: lat
+			});
+		});
+	}
+
+
+exports.geoloco = geo;

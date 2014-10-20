@@ -1,0 +1,56 @@
+var geo = require('geo');
+var map = require("map");
+
+function DetailView(band){
+	var win = Ti.UI.createWindow({ //window that opens from table row
+		title: band.title,
+		backgroundColor: "#000"
+	});
+	
+	var mapview = map.createMap();
+	
+	win.add(mapview);
+	
+	
+	
+	var img = Ti.UI.createImageView({
+		image: band.mainImage,
+		width: "320dp",
+		height: "320dp",
+		top: "50dp"
+	});
+	
+	var headerLabel = Ti.UI.createLabel({
+		text: band.detailTitle,
+		font: {
+			fontSize: "16dp",
+			fontFamily: (Ti.Platform.osname === "android") ? "Helvetica" : "Helvetica",
+			fontWeight: "bold" 
+		},
+		top: "156dp",
+		right: "12dp",
+		color: "#FFF",
+		textAlign: Ti.UI.TEXT_ALIGNMENT_RIGHT,
+		//Shadow: iOS only
+		shadowColor: "#2D497B", 
+		shadowOffset: {x:1, y:1}
+	});
+
+	var detail = Ti.UI.createWebView({
+		url: band.detail,
+		top: "400dp",
+		height: '200dp',
+		enableZoomControls: false //Android only
+	});
+
+	win.add(img);
+	win.add(detail);
+	win.add(headerLabel);
+
+
+
+	return win;
+}
+
+
+module.exports = DetailView;

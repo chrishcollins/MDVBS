@@ -1,10 +1,10 @@
-//var component = require('components');
-//component.components();
+var component = require('components');
+component.components();
 var Cloud = require('cloud');
 var geo = require('geoLocation');
 geo.geolocation();
 
-var myWeather = 'http://api.wunderground.com/api/c8aa6df478360a59/forecast/q/autoip.json';
+var myWeather = 'http://api.wunderground.com/api/c8aa6df478360a59/forecast/q/28.4158,-81.2989.json';
 
 //create remote response
 var remoteResponse = function(e) {
@@ -40,16 +40,7 @@ var appNameView = Ti.UI.createImageView({
 	left : '20%'
 });
 
-/*	var thisCity = Ti.UI.createLabel({
- text : thiscity,
- font : {
- fontSize : 30,
- fontWeight : 'bold'
- },
- color : '#fff',
- top : '11%',
- textAlign : 'center'
- }); */
+
 
 var dayOne = Ti.UI.createLabel({
 	text : day + ", " + todaysdate,

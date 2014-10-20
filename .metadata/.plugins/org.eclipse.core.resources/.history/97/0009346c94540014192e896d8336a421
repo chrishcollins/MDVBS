@@ -1,0 +1,30 @@
+var ui = function(){	
+
+// Create a TableView.
+var concertView = Ti.UI.createTableView();
+
+// Populate the TableView data.
+var data = [
+	{title:'Row 1', hasChild:true, color:'red', header:'First'},
+	{title:'Row 2', hasDetail:true, color:'green'},
+	{title:'Row 3', hasCheck:true, color:'blue', header:'Second'},
+	{title:'Row 4', color:'orange'}
+];
+concertView.setData(data);
+
+// Listen for click events.
+concertView.addEventListener('click', function(e) {
+	alert('title: \'' + e.row.title + '\', section: \'' + e.section.headerTitle + '\', index: ' + e.index);
+});
+
+// Add to the parent view.
+ui/tablet/ApplicationWindow.add(concertView);
+
+
+
+
+
+return ui;
+};
+
+module.exports = ui;

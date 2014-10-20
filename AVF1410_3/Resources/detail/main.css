@@ -1,0 +1,19 @@
+body, html{
+	font-family: "Helvetica", Arial, sans-serif;
+	font-size: 0.95em;
+	color: #ffffff;
+	line-height: 1.5em;
+	background: #404040;
+}
+h1{
+	font-size: 120%;
+	font-family: "Helvetica", "Helvetica"; 
+	margin-bottom: -12px;
+}
+dt{
+	color:#0D97FF;
+	font-style: italic;
+}
+dd{
+	margin: 0 0 12px 18px;
+}

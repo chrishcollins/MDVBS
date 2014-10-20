@@ -1,0 +1,11 @@
+function ApplicationTabGroup() {
+	
+
+
+
+
+
+return self;
+};
+
+module.exports = ApplicationTabGroup;
