@@ -34,12 +34,13 @@ exports.createMap = function(latitude, longitude, name, city) {
 
 
 
-var MapModule = require('ti.map');
+var Map = require('ti.map');
 
 
 function createMap() {
-	var mapview = MapModule.createView({
-		mapType : MapModule.NORMAL_TYPE,
+	
+	var mapview = Map.createView({
+		mapType : Map.NORMAL_TYPE,
 		animate : true,
 		region : {
 			latitude : latitude,
@@ -58,11 +59,11 @@ function createMap() {
 }
 
 function createAnnotation(){
-	var pin = MapModule.createAnnotation({
+	var pin = Map.createAnnotation({
 		latitude : params.lat,
 		longitude : lon,
 		title : title,
-		pincolor : MapModule.ANNOTATION_RED,
+		pincolor : Map.ANNOTATION_RED,
 	});
 
 	return pin;

@@ -7,15 +7,17 @@ tabGroup.open();
 // Create the window "mainWin" 
 var mainWin = Titanium.UI.createWindow ({ 
     title: 'Band Planet',
-    backgroundImage: 'images/concert.jpg', 
+    backgroundColor: '#000', 
     url: 'bands.js', // Link to file which will handle the code for the window
-   // statusBarStyle : Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
+    tabBarHidden: true,
+   //statusBarStyle : Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
 });
+
 
  
 // Create the tab "mainTab" 
 var mainTab = Titanium.UI.createTab ({
-    title: "Band Planet", 
+    title: "Concerts", 
     icon: 'KS_nav_ui.png', 
     window: mainWin // We will create the window "mainWin" 
 });

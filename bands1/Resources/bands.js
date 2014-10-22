@@ -2,47 +2,49 @@ var win = Titanium.UI.currentWindow;
 
 var Geolocation = require('geolocation');
 //var Map = require('map');
-
-
+//var Camera = require('camera');
+var Map = require('ti.map');
+var geolocation = require('geolocation');
 var tableView = Titanium.UI.createTableView({});
 
 var bandInfo = {};
 
-function loadBands() {
+var loadBands = function(arg1, arg2) {
+	console.log((loadBands));
+
 	// Empty array "rowData" for our tableview
 	var rowData = [];
 
-	
 	var xhr = Titanium.Network.createHTTPClient();
 
-	xhr.open("GET", "http://api.bandsintown.com/artists/Family%20Force%205/events/recommended?location=Wise,VA&radius=100&app_id=CHRIS_COLLINS&api_version=2.0&format=json");
-	
+	xhr.open("GET", "http://api.bandsintown.com/artists/Family%20Force%205/events/recommended?location=Wise,VA&radius=150&app_id=CHRIS_COLLINS&api_version=2.0&format=json");
 
 	// Runs the function when the data is ready for us to process
 	xhr.onload = function() {
-		var bands = eval('(' + this.responseText + ')');
+		var bands = JSON.parse(this.responseText);
 		for (var i = 0; i < bands.length; i++) {
 			var concertDate = bands[i].formatted_datetime;
-			bandInfo.shortconcertDate = bands[i].datetime;
-			var tour_dates = bands[i].artists.facebook_tour_dates_url;
-			var smallImage = bands[i].artists.thumb_url;
-			var medImage = bands[i].artists.image_url;
+			var shortconcertDate = bands[i].datetime;
+			var tour_dates = bands[i].artists[0].facebook_tour_dates_url;
+			var smallImage = bands[i].artists[0].thumb_url;
+			var medImage = bands[i].artists[0].image_url;
 			var city_lbl = bands[i].venue.city;
 			var state_lbl = bands[i].venue.region;
 			var arena = bands[i].venue.name;
 			var tour_lbl = bands[i].title;
-			var tour_band = bands[i].artists.name;
+			var tour_band = bands[i].artists[0].name;
 			var concert_location = bands[i].formatted_location;
 			var lat = bands[i].venue.latitude;
 			var lon = bands[i].venue.longitude;
 			var ticket_type = bands[i].ticket_type;
 			var ticket_status = bands[i].ticket_status;
-			
+			var buy_ticket = bands[i].ticket_url;
 
 			var row = Titanium.UI.createTableViewRow({
-				height : '80',
+				height : '90',
 				backgroundColor : '#000',
-				hasChild : 'yes'
+				hasChild : 'yes',
+				content : bands[i]
 			});
 
 			// Create the view that will contain the text and Images
@@ -57,8 +59,8 @@ function loadBands() {
 
 			// Create image view to hold profile pic
 			var bandImage = Titanium.UI.createImageView({
-				image : 'smallImage', // the image for the image view
-				top : 2.5,
+				image : smallImage, // the image for the image view
+				top : 5,
 				left : 5,
 				height : 70,
 				width : 70
@@ -67,7 +69,7 @@ function loadBands() {
 
 			// Create the label to hold the screen name
 			var date_lbl = Titanium.UI.createLabel({
-				text :concertDate,
+				text : concertDate,
 				color : '#fff',
 				left : 85,
 				width : 'auto',
@@ -89,7 +91,7 @@ function loadBands() {
 				color : 'red',
 				left : 85,
 				right : 5,
-				top : 10,
+				top : 5,
 				bottom : 2,
 				height : 'auto',
 				width : 'auto',
@@ -107,13 +109,12 @@ function loadBands() {
 			// Give each row a class name
 			row.className = "item" + i;
 			// Add row to the rowData array
-			rowData[i] = row;
+			rowData.push(row);
 		}
 		// Create the table view and set its data source to "rowData" array
-		tableView.data=rowData;
-		tableView.backgroundImage='images/concert.jpg';
-		tableView.separatorColor='red';
-		
+		tableView.data = rowData;
+		tableView.backgroundImage = 'images/background.jpg';
+		tableView.separatorColor = 'red';
 
 		//Add the table view to the window
 		win.add(tableView);
@@ -121,34 +122,34 @@ function loadBands() {
 	};
 	// Send the HTTP request
 	xhr.send();
-}
+};
 
 loadBands();
 
-
 function createNewWindow(params) {
 	var win = Ti.UI.createWindow({
-		title: params.title,
-		backgroundColor: '#fff'
+		title : params.title,
+		backgroundColor : '#fff'
 	});
 	return win;
 }
 
 // Listen for click events.
-tableView.addEventListener('click', function(){	
+tableView.addEventListener('click', function(e) {
+	console.log(JSON.stringify(e.row));
 	var newbandWin = createNewWindow({
 		title : 'tour_band',
+		color : '#fff',
 		url : 'bandWin.js', // Link to file which will handle the code for the window
 		backgroundImage : 'images/concert.jpg',
 		tabBarHidden : false,
 		statusBarHidden : false,
 	});
 
-
 	var groupView = Ti.UI.createScrollView({
 		height : '100%',
-		layout : 'vertical',
-		backgroundColor: 'black',
+		//layout : 'vertical',
+		backgroundColor : 'black',
 		right : 5,
 		left : 5
 	});
@@ -156,36 +157,44 @@ tableView.addEventListener('click', function(){
 	newbandWin.add(groupView);
 
 	var band1 = Ti.UI.createImageView({
-		//backgroundColor : 'red',
-		image : 'smallImage',
-		width : '150',
-		height : '150',
+		borderRadius : 10,
+		image : e.row.content.artists[0].image_url,
+		width : '165',
+		height : '165',
 		top : 50
 	});
 	groupView.add(band1);
 
+	var backImage = Ti.UI.createView({
+		backgroundImage : 'images/background.jpg',
+		bottom : 0,
+		left : 0,
+		width : '100%',
+		borderRadius : 10,
+		height : '450'
+	});
+
+	groupView.add(backImage);
+
 	// Create a Label.
 	var groupName = Ti.UI.createLabel({
-		text : 'tour_band',
+		text : e.row.content.artists[0].name,
 		color : '#fff',
 		font : {
 			fontFamily : 'Helvetica',
-			fontSize : 24,
+			fontSize : 28,
 			fontWeight : 'bold'
 		},
 		height : 'auto',
 		width : 'auto',
-		top : 'band1.top + 170',
+		top : band1.top + 170,
 		textAlign : 'center'
 	});
 
-	// Add to the parent view.
 	groupView.add(groupName);
 
-	//console.log(bandInfo.concertDate);
-
 	var tourDate = Ti.UI.createLabel({
-		text : this.formatted_datetime,
+		text : e.row.content.formatted_datetime,
 		color : '#fff',
 		font : {
 			fontFamily : 'Helvetica',
@@ -194,7 +203,7 @@ tableView.addEventListener('click', function(){
 		},
 		height : 'auto',
 		width : 'auto',
-		top : 'groupName.top + 35',
+		top : groupName.top + 35,
 		textAlign : 'center'
 	});
 
@@ -202,7 +211,7 @@ tableView.addEventListener('click', function(){
 	groupView.add(tourDate);
 
 	var tourCity = Ti.UI.createLabel({
-		text : this.formatted_location,
+		text : e.row.content.formatted_location,
 		color : '#fff',
 		font : {
 			fontFamily : 'Helvetica',
@@ -211,7 +220,7 @@ tableView.addEventListener('click', function(){
 		},
 		height : 'auto',
 		width : 'auto',
-		top : 'tourDate.top + 35',
+		top : tourDate.top + 35,
 		textAlign : 'center'
 	});
 
@@ -219,7 +228,7 @@ tableView.addEventListener('click', function(){
 	groupView.add(tourCity);
 
 	var getTickets = Ti.UI.createLabel({
-		text : this.ticket_type + ' are ' + this.ticket_status,
+		text : e.row.content.ticket_type + ' are ' + e.row.content.ticket_status,
 		color : '#fff',
 		font : {
 			fontFamily : 'Helvetica',
@@ -228,7 +237,7 @@ tableView.addEventListener('click', function(){
 		},
 		height : 'auto',
 		width : 'auto',
-		top : 'tourCity.top + 100',
+		top : tourCity.top + 60,
 		textAlign : 'center'
 	});
 
@@ -238,27 +247,180 @@ tableView.addEventListener('click', function(){
 	// Create a Button.
 	var back_btn = Ti.UI.createButton({
 		title : 'Back',
-		borderColor : 'gray',
-		backgroundColor : '#fff',
-		borderRadius : 10,
+		color : '#fff',
+		backgroundImage : 'images/redbtn.png',
 		height : 30,
 		width : 80,
-		top : 0,
-		left : 5
+		top : 20,
+		left : 15
 	});
 
 	// Add to the parent view.
 	groupView.add(back_btn);
 
-var Map = new MapModule();
-
-//newbandWin.add('Map');
-
-	//newbandWin.open();
+	newbandWin.open();
 
 	// Listen for click events.
+
+	////////////////////Starts Camera////////////////////
+	var mediaBtn = Ti.UI.createButton({
+		title : "Camera",
+		backgroundImage : 'images/cambtn.png',
+		//borderColor : "#2261E8",
+		//borderRadius : "5",
+		color : "#fff",
+		bottom : 50,
+		width : 140,
+		height : 140
+		//zIndex : "1"
+	});
+	groupView.add(mediaBtn);
+
+	var mediaView = Ti.UI.createView({
+		top : "20%",
+		width : "90%",
+		height : "",
+		backgroundColor : "#FFCC00" //So that we can see the view area
+	});
+	groupView.add(mediaView);
+	var img;
+	//forward reference for the container for the image
+
+	//An object to hold camera callbacks
+	var camera = {
+		onSuccess : function(e) {
+			if (e.mediaType === Ti.Media.MEDIA_TYPE_PHOTO) {//Make sure it is a PHOTO that has been taken
+
+				if (img) {
+					//Image view exists; let's remove it before we add again
+					mediaView.remove(img);
+					//
+				}
+				//e.media is a Blob representing the image
+				//we can plug it into the image property of a new imageView
+				img = Ti.UI.createImageView({
+					image : e.media,
+					zIndex : 1
+				});
+
+				//Add the photo taken to the mediaView view
+				//The photo will scale down to the view
+				mediaView.add(img);
+
+				//If you wanted, you could get more information about the size of the picture
+				//via the .size property of e.media
+
+			} else if (e.mediaType === Ti.Media.MEDIA_TYPE_VIDEO) {
+				vid = Ti.Media.createVideoPlayer({
+					media : e.media
+				});
+
+				//Add the video taken to the media view
+				mediaView.add(vid);
+			} else {
+				alert("This is not a photo or video");
+			}
+		},
+		onCancel : function(e) {
+			alert("Photo cancelled");
+		},
+		onError : function(e) {
+			alert("An error occured with code: " + e.code);
+		}
+	};
+
+	mediaBtn.addEventListener("click", function(e) {
+		Ti.Media.showCamera({
+			success : camera.onSuccess,
+			cancel : camera.onCancel,
+			error : camera.onError,
+			allowEditing : true, //iOS only
+			mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO, Titanium.Media.MEDIA_TYPE_VIDEO], //Make sure only pictures are taken
+			videoQuality : Ti.Media.QUALITY_HIGH, //Set the quality of the picture to be taken
+			saveToPhotoGallery : true //set to true if you want the photo automatically saved to the device's photo gallery
+		});
+
+	});
+
+	/////////////////////////Photo Gallery//////////////////////
+
+	var galleryButton = Titanium.UI.createButton({
+		title : "Photos",
+		color : '#fff',
+		backgroundImage : 'images/redbtn.png',
+		height : 30,
+		width : 80,
+		top : 20,
+		right : 15,
+		zIndex : 2
+	});
+
+	groupView.add(galleryButton);
+	
+	galleryButton.addEventListener("click", function(e) {
+		//Open the photo gallery
+		Titanium.Media.openPhotoGallery({
+			//function to call upon successful load of the gallery
+			success : function(e) {
+			alert("Your image was saved.");
+			},
+			error : function(e) {
+				alert("There was an error");
+			},
+			cancel : function(e) {
+				alert("The photo gallery was cancelled");
+			},
+			//Allow editing of media before success
+			allowEditing : true,
+			saveToPhotoGallery : true,
+			//Media types to allow
+			mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO,Titanium.Media.MEDIA_TYPE_VIDEO]
+			//The other is Titanium.Media.MEDIA_TYPE_VIDEO
+		});
+
+	});
+
+	////////////////starts map//////////////////////////////
+
+	function createMap() {
+
+		var annotation = Map.createAnnotation({
+			latitude : e.row.content.venue.latitude, //params.lat,
+			longitude : e.row.content.venue.longitude, //lon
+			title : e.row.content.artists[0].name, //title,
+			subtitle : e.row.content.venue.name,
+			image : 'images/guitar',
+			animate : true,
+			customProperty : "Concert"
+		});
+
+		var mapview = Map.createView({
+			mapType : Map.HYBRID,
+			animate : true,
+			region : {
+				latitude : e.row.content.venue.latitude, //'latitude',
+				longitude : e.row.content.venue.longitude, //'longitude',
+				latitudeDelta : 0.05,
+				longitudeDelta : 0.05
+			},
+			regionFit : false,
+			height : 300,
+			width : 400,
+			bottom : 320,
+			userLocation : true,
+			annotations : [annotation]
+		});
+		mapview.selectAnnotation(annotation);
+
+		groupView.add(mapview);
+		return mapview;
+	}
+
+
 	back_btn.addEventListener('click', function() {
 		newbandWin.close();
 	});
 
-});
+	createMap();
+
+}); 

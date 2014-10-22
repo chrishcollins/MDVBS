@@ -8,7 +8,7 @@
 #define STRING(x) _QUOTEME(x)
 
 NSString * const TI_APPLICATION_DEPLOYTYPE = @"development";
-NSString * const TI_APPLICATION_ID = @"com.bands.one";
+NSString * const TI_APPLICATION_ID = @"com.fullsail.demoApp";
 NSString * const TI_APPLICATION_PUBLISHER = @"chriscollins";
 NSString * const TI_APPLICATION_URL = @"http://";
 NSString * const TI_APPLICATION_NAME = @"bands1";

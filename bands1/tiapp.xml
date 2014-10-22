@@ -2,7 +2,7 @@
 <ti:app xmlns:ti="http://ti.appcelerator.org">
     <property name="acs-api-key-production" type="string">i484Sv0Ky3fMdcl50veLfjCIV9qLSiYr</property>
     <property name="acs-api-key-development" type="string">EPQTDuXHOeZtFNCiRUVZLoDMfs7cbxf5</property>
-    <id>com.bands.one</id>
+    <id>com.fullsail.demoApp</id>
     <name>bands1</name>
     <version>1.0</version>
     <publisher>chriscollins</publisher>
@@ -18,6 +18,8 @@
     <ios>
         <plist>
             <dict>
+            	<key>NSLocationAlwaysUsageDescription</key>
+				<string>This application would like to use your current location</string>
                 <key>UISupportedInterfaceOrientations~iphone</key>
                 <array>
                     <string>UIInterfaceOrientationPortrait</string>
@@ -40,7 +42,30 @@
             </dict>
         </plist>
     </ios>
-    <android xmlns:android="http://schemas.android.com/apk/res/android"/>
+    <android xmlns:android="http://schemas.android.com/apk/res/android">
+        <manifest>
+            <uses-sdk android:targetSdkVersion="14"/>
+            <!-- Allows the API to download data from Google Map servers -->
+            <uses-permission android:name="android.permission.INTERNET"/>
+            <!-- Allows the API to cache data -->
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+            <!-- Use GPS for device location -->
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+            <!-- Use Wi-Fi or mobile connection for device location -->
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+            <!-- Allows the API to access Google web-based services -->
+            <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+            <!-- Specify OpenGL ES 2.0 as a requirement -->
+            <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+            <uses-permission android:name="com.appcelerator.sample.mapping.permission.MAPS_RECEIVE"/>
+            <permission
+                android:name="com.appcelerator.sample.mapping.permission.MAPS_RECEIVE" android:protectionLevel="signature"/>
+            <application>
+                <meta-data
+                    android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyD1OJ6fxdOTRdupdAYRsYKO6PHVEQlEbls"/>
+            </application>
+        </manifest>
+    </android>
     <mobileweb>
         <precache/>
         <splash>

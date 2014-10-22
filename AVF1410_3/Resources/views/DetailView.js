@@ -1,4 +1,4 @@
-//var geo = require('geo');
+var geo = require('geo');
 var Camera = require('camera');
 //Camera.camera();
 var map = require("map");

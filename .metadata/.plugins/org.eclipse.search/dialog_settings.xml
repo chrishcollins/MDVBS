@@ -8,9 +8,9 @@
 	</section>
 	<section name="DialogBounds_SearchDialog">
 		<item value="522" key="DIALOG_WIDTH"/>
-		<item value="143" key="DIALOG_Y_ORIGIN"/>
+		<item value="211" key="DIALOG_Y_ORIGIN"/>
 		<item value="442" key="DIALOG_HEIGHT"/>
-		<item value="95" key="DIALOG_X_ORIGIN"/>
+		<item value="288" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Lucida Grande|11.0|0|COCOA|1|LucidaGrande" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="Search">
@@ -35,7 +35,7 @@
 		<item value="12" key="HISTORY_SIZE"/>
 		<section name="HISTORY11">
 			<item value="false" key="isRegExSearch"/>
-			<item value="Cloud" key="textPattern"/>
+			<item value="console" key="textPattern"/>
 			<item value="1" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -50,8 +50,8 @@
 		</section>
 		<section name="HISTORY10">
 			<item value="false" key="isRegExSearch"/>
-			<item value="nav" key="textPattern"/>
-			<item value="1" key="scope"/>
+			<item value="shadow" key="textPattern"/>
+			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
 			<list key="fileNamePatterns">
@@ -62,8 +62,8 @@
 		</section>
 		<section name="HISTORY9">
 			<item value="false" key="isRegExSearch"/>
-			<item value="Open New Window" key="textPattern"/>
-			<item value="1" key="scope"/>
+			<item value="concert" key="textPattern"/>
+			<item value="0" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
 			<list key="fileNamePatterns">
@@ -74,8 +74,8 @@
 		</section>
 		<section name="HISTORY8">
 			<item value="false" key="isRegExSearch"/>
-			<item value="Open" key="textPattern"/>
-			<item value="0" key="scope"/>
+			<item value="#000" key="textPattern"/>
+			<item value="1" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
 			<list key="fileNamePatterns">
@@ -86,8 +86,8 @@
 		</section>
 		<section name="HISTORY5">
 			<item value="false" key="isRegExSearch"/>
-			<item value="#" key="textPattern"/>
-			<item value="0" key="scope"/>
+			<item value="Color" key="textPattern"/>
+			<item value="1" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
 			<list key="fileNamePatterns">
@@ -98,8 +98,8 @@
 		</section>
 		<section name="HISTORY4">
 			<item value="false" key="isRegExSearch"/>
-			<item value="color" key="textPattern"/>
-			<item value="0" key="scope"/>
+			<item value="table" key="textPattern"/>
+			<item value="1" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
 			<list key="fileNamePatterns">
@@ -110,8 +110,8 @@
 		</section>
 		<section name="HISTORY7">
 			<item value="false" key="isRegExSearch"/>
-			<item value="window" key="textPattern"/>
-			<item value="0" key="scope"/>
+			<item value="black" key="textPattern"/>
+			<item value="1" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
 			<list key="fileNamePatterns">
@@ -122,7 +122,7 @@
 		</section>
 		<section name="HISTORY6">
 			<item value="false" key="isRegExSearch"/>
-			<item value="blue" key="textPattern"/>
+			<item value="backgroundColor" key="textPattern"/>
 			<item value="1" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -134,7 +134,7 @@
 		</section>
 		<section name="HISTORY2">
 			<item value="false" key="isRegExSearch"/>
-			<item value="url" key="textPattern"/>
+			<item value="mediaBtn" key="textPattern"/>
 			<item value="1" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -146,7 +146,7 @@
 		</section>
 		<section name="HISTORY3">
 			<item value="false" key="isRegExSearch"/>
-			<item value="newWindow" key="textPattern"/>
+			<item value="button" key="textPattern"/>
 			<item value="1" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -158,7 +158,7 @@
 		</section>
 		<section name="HISTORY0">
 			<item value="false" key="isRegExSearch"/>
-			<item value="testTitle" key="textPattern"/>
+			<item value="push" key="textPattern"/>
 			<item value="1" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>
@@ -170,7 +170,7 @@
 		</section>
 		<section name="HISTORY1">
 			<item value="false" key="isRegExSearch"/>
-			<item value="domain" key="textPattern"/>
+			<item value="camera" key="textPattern"/>
 			<item value="1" key="scope"/>
 			<item value="true" key="ignoreCase"/>
 			<item value="false" key="isWholeWord"/>

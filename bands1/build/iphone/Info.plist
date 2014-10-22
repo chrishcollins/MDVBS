@@ -14,7 +14,7 @@
 	<array>
 		<dict>
 			<key>CFBundleURLName</key>
-			<string>com.bands.one</string>
+			<string>com.fullsail.demoApp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>bands1</string>
@@ -22,7 +22,7 @@
 		</dict>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.bands.one</string>
+	<string>com.fullsail.demoApp</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -45,6 +45,8 @@
 	<false/>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleDefault</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>This application would like to use your current location</string>
 	<key>UISupportedInterfaceOrientations~iphone</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

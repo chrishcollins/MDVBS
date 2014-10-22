@@ -1,0 +1,33 @@
+// Creates a tab group with Titanium.UI API. 
+var tabGroup =Titanium.UI.createTabGroup();
+ 
+tabGroup.open();
+
+
+// Create the window "mainWin" 
+var mainWin = Titanium.UI.createWindow ({ 
+    title: 'Band Planet',
+    backgroundColor: '#000', 
+    url: 'bands.js', // Link to file which will handle the code for the window
+    tabBarHidden: true,
+   //statusBarStyle : Titanium.UI.iPhone.StatusBar.LIGHT_CONTENT
+});
+
+var btmView = Ti.UI.createView({
+	backgroundColor: '#000',
+	bottom:0,
+	height: 40,
+	width: '100%'
+});
+mainWin.add(btmView);
+ 
+// Create the tab "mainTab" 
+var mainTab = Titanium.UI.createTab ({
+    title: "Concerts", 
+    icon: 'KS_nav_ui.png', 
+    window: mainWin // We will create the window "mainWin" 
+});
+ 
+// Add the tab to our tab group 
+tabGroup.addTab(mainTab);
+tabGroup.open();
