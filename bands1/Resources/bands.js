@@ -73,7 +73,7 @@ var loadBands = function(arg1, arg2) {
 				color : '#fff',
 				left : 85,
 				width : 'auto',
-				top : -48,
+				top : -55,
 				bottom : 2,
 				height : 'auto',
 				textAlign : 'left',
