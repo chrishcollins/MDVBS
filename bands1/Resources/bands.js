@@ -5,7 +5,9 @@ var Geolocation = require('geolocation');
 //var Camera = require('camera');
 var Map = require('ti.map');
 var geolocation = require('geolocation');
-var tableView = Titanium.UI.createTableView({});
+var tableView = Titanium.UI.createTableView({
+	top : 350
+});
 
 var bandInfo = {};
 
@@ -43,6 +45,7 @@ var loadBands = function(arg1, arg2) {
 			var row = Titanium.UI.createTableViewRow({
 				height : '90',
 				backgroundColor : '#000',
+				backgroundImage : 'images/blackbar_04.png',
 				hasChild : 'yes',
 				content : bands[i]
 			});
@@ -63,7 +66,8 @@ var loadBands = function(arg1, arg2) {
 				top : 5,
 				left : 5,
 				height : 70,
-				width : 70
+				width : 70,
+				borderRadius : 10
 			});
 			post_view.add(bandImage);
 
@@ -129,8 +133,18 @@ loadBands();
 function createNewWindow(params) {
 	var win = Ti.UI.createWindow({
 		title : params.title,
-		backgroundColor : '#fff'
+		//backgroundColor : '#000',
+		top : 0
 	});
+
+	var bp = Ti.UI.createImageView({
+		top : 0,
+		width : '100%',
+		height : '500',
+		image : 'images/bp.png'
+	});
+
+	win.add(bp);
 	return win;
 }
 
@@ -150,8 +164,8 @@ tableView.addEventListener('click', function(e) {
 		height : '100%',
 		//layout : 'vertical',
 		backgroundColor : 'black',
-		right : 5,
-		left : 5
+		right : 0,
+		left : 0
 	});
 
 	newbandWin.add(groupView);
@@ -198,11 +212,11 @@ tableView.addEventListener('click', function(e) {
 		color : '#fff',
 		font : {
 			fontFamily : 'Helvetica',
-			fontSize : 20,
-			fontWeight : 'bold'
+			fontSize : 16,
+			fontWeight : 'thin'
 		},
 		height : 'auto',
-		width : 'auto',
+		width : '175',
 		top : groupName.top + 35,
 		textAlign : 'center'
 	});
@@ -220,7 +234,7 @@ tableView.addEventListener('click', function(e) {
 		},
 		height : 'auto',
 		width : 'auto',
-		top : tourDate.top + 35,
+		top : tourDate.top + 45,
 		textAlign : 'center'
 	});
 
@@ -237,7 +251,7 @@ tableView.addEventListener('click', function(e) {
 		},
 		height : 'auto',
 		width : 'auto',
-		top : tourCity.top + 60,
+		top : tourCity.top + 55,
 		textAlign : 'center'
 	});
 
@@ -260,7 +274,62 @@ tableView.addEventListener('click', function(e) {
 
 	newbandWin.open();
 
+	/////////////////////////////Ticket Window/////////////////////////
+
+	// Create a Button.
+	var tktButton = Ti.UI.createButton({
+		title : 'Buy Tickets',
+		color : 'red',
+		font : {
+			fontFamily : 'Helvetica',
+			fontSize : 20,
+			fontWeight : 'bold'
+		},
+		height : 20,
+		width : 200,
+		top : getTickets.top + 30
+	});
+
 	// Listen for click events.
+	tktButton.addEventListener('click', function() {
+		alert('You will now be redirected to the ticket site.');
+
+		var tktWebView = Ti.UI.createWebView({// Create a WebView
+			url : e.row.content.ticket_url,
+			height : 'auto',
+			width : 'auto',
+
+		});
+		tktWebView.addEventListener('load', function(e) {
+			Ti.API.info('webview loaded: ' + e.url);
+		});
+
+		// Add to the parent view.
+		groupView.add(tktWebView);
+
+		// Create a Button.
+		var backButton = Ti.UI.createButton({
+			title : 'Back',
+			color : '#fff',
+			backgroundImage : 'images/redbtn.png',
+			height : 30,
+			width : 80,
+			top : 20,
+			left : 15
+		});
+
+		// Listen for click events.
+		backButton.addEventListener('click', function() {
+			tktWebView.hide();
+		});
+
+		// Add to the parent view.
+		tktWebView.add(backButton);
+
+	});
+
+	// Add to the parent view.
+	groupView.add(tktButton);
 
 	////////////////////Starts Camera////////////////////
 	var mediaBtn = Ti.UI.createButton({
@@ -272,7 +341,6 @@ tableView.addEventListener('click', function(e) {
 		bottom : 50,
 		width : 140,
 		height : 140
-		//zIndex : "1"
 	});
 	groupView.add(mediaBtn);
 
@@ -356,13 +424,13 @@ tableView.addEventListener('click', function(e) {
 	});
 
 	groupView.add(galleryButton);
-	
+
 	galleryButton.addEventListener("click", function(e) {
 		//Open the photo gallery
 		Titanium.Media.openPhotoGallery({
 			//function to call upon successful load of the gallery
 			success : function(e) {
-			alert("Your image was saved.");
+				alert("Your image was saved.");
 			},
 			error : function(e) {
 				alert("There was an error");
@@ -374,7 +442,7 @@ tableView.addEventListener('click', function(e) {
 			allowEditing : true,
 			saveToPhotoGallery : true,
 			//Media types to allow
-			mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO,Titanium.Media.MEDIA_TYPE_VIDEO]
+			mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO, Titanium.Media.MEDIA_TYPE_VIDEO]
 			//The other is Titanium.Media.MEDIA_TYPE_VIDEO
 		});
 
@@ -406,7 +474,7 @@ tableView.addEventListener('click', function(e) {
 			regionFit : false,
 			height : 300,
 			width : 400,
-			bottom : 320,
+			bottom : 300,
 			userLocation : true,
 			annotations : [annotation]
 		});
@@ -423,4 +491,4 @@ tableView.addEventListener('click', function(e) {
 
 	createMap();
 
-}); 
+});

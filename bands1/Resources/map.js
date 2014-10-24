@@ -4,6 +4,7 @@ var geolocation = require('geolocation');
 
 	////////////////starts map//////////////////////////////
 
+	
 	function createMap() {
 
 		var annotation = Map.createAnnotation({
@@ -17,7 +18,7 @@ var geolocation = require('geolocation');
 		});
 
 		var mapview = Map.createView({
-			mapType : Map.NORMAL_TYPE,
+			mapType : Map.HYBRID,
 			animate : true,
 			region : {
 				latitude : e.row.content.venue.latitude, //'latitude',
@@ -28,12 +29,12 @@ var geolocation = require('geolocation');
 			regionFit : false,
 			height : 300,
 			width : 400,
-			bottom : 320,
+			bottom : 300,
 			userLocation : true,
 			annotations : [annotation]
 		});
 		mapview.selectAnnotation(annotation);
-
+dataInfo.loadMaps(annotation, mapview);
 		groupView.add(mapview);
 		return mapview;
 	}

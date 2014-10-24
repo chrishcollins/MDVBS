@@ -7,6 +7,12 @@ var geolocation = function() {
 
 	Ti.Geolocation.purpose = "Your location is needed to determine current location.";
 	Ti.Geolocation.accuracy = Ti.Geolocation.ACCURACY_BEST;
+	if (Titanium.Network.networkType === Titanium.Network.NETWORK_NONE) {
+   Titanium.API.info(' Network Not found ');
+} else {
+   Titanium.API.info(' connection present ');
+}
+	
 	Ti.Geolocation.getCurrentPosition(function(e) {
 		//latitude = 36.9781;//e.coords.latitude;
 		//longitude = 82.5769;//e.coords.longitude;

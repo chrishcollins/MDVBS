@@ -1,18 +1,18 @@
 var ui = require('ui');
 
 //install the .sqlite DB - happens once
-Ti.Database.install('/database/weatherdb.sqlite', 'nameInfo'); //will use'nameInfo to reference the 
+Ti.Database.install('bandData.sqlite', 'nameInfo'); //will use'nameInfo' to reference  
 
 //load/open the DB
 var tblData = [];
 var read = function(){
 	var db = Ti.Database.open('nameInfo');
-	var dbRows = db.execute('SELECT id, name, desc FROM asdTbl'); //returns a ResultSet object
+	var dbRows = db.execute('SELECT id, name, desc FROM bandTbl'); //returns a ResultSet object
 	while (dbRows.isValidRow()) { // .isValidRow() returns BOOLEAN
 		tblData.push({
 			id: dbRows.fieldByName('id'),
 			name: dbRows.fieldByName('name'),
-			desc: dbRows.fieldByName('desc')
+			desc: dbRows.fieldByName('band')
 			//.fieldByName() asigns the fields value to the label of the current row
 		});
 		dbRows.next(); //returns True if there is another row in the ResultSet object, else FALSE
@@ -25,7 +25,7 @@ exports.read = read;
 
 var create = function(name, desc) {
 	var db = Ti.Database.open('nameInfo');
-	db.execute('INSERT INTO asdTbl (name, desc) VALUES (?, ?)', name, desc);
+	db.execute('INSERT INTO bandTbl (name, desc) VALUES (?, ?)', name, desc);
 	var rowID = db.lastInsertRowId;
 	db.close();
 	tblData = [];
@@ -34,8 +34,8 @@ var create = function(name, desc) {
 exports.create = create;
 
 var update = function(index, location){
-	var db = Ti.Database.open('weatherDb');
-	db.execute('UPDATE list SET city=?, currentTemp=? id id=?', ui.nameField.value, ui.descField.value);
+	var db = Ti.Database.open('bandData');
+	db.execute('UPDATE list SET city=?, band=? id id=?', ui.nameField.value, ui.descField.value);
 	db.close();
 	tblData = [];
 	read();
