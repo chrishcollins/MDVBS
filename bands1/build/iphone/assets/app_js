@@ -1,0 +1,1 @@
+var tabGroup=Titanium.UI.createTabGroup();tabGroup.open();var mainWin=Titanium.UI.createWindow({title:"Band Planet",backgroundImage:"images/bp.png",navBarHidden:!0,url:"bands.js",tabBarHidden:!0,top:0}),mainTab=Titanium.UI.createTab({title:"Concerts",icon:"KS_nav_ui.png",window:mainWin});tabGroup.addTab(mainTab),tabGroup.open();

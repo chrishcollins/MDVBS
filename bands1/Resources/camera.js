@@ -2,25 +2,25 @@
 
 	var mediaBtn = Ti.UI.createButton({
 		title : "Camera",
-		backgroundImage : 'images/redbtn.png',
+		backgroundImage : 'images/cambtn.png',
 		//borderColor : "#2261E8",
 		//borderRadius : "5",
-		color : "#2261E8",
+		color : "#fff",
 		bottom : 50,
-		width : 200,
-		//zIndex : "1"
+		width : 140,
+		height : 140
 	});
+	groupView.add(mediaBtn);
 
 	var mediaView = Ti.UI.createView({
 		top : "20%",
 		width : "90%",
-		height : "auto",
+		height : "",
 		backgroundColor : "#FFCC00" //So that we can see the view area
 	});
-
+	groupView.add(mediaView);
 	var img;
 	//forward reference for the container for the image
-
 
 	//An object to hold camera callbacks
 	var camera = {
@@ -71,11 +71,13 @@
 			cancel : camera.onCancel,
 			error : camera.onError,
 			allowEditing : true, //iOS only
-			mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO], //Make sure only pictures are taken
+			mediaTypes : [Ti.Media.MEDIA_TYPE_PHOTO, Titanium.Media.MEDIA_TYPE_VIDEO], //Make sure only pictures are taken
 			videoQuality : Ti.Media.QUALITY_HIGH, //Set the quality of the picture to be taken
 			saveToPhotoGallery : true //set to true if you want the photo automatically saved to the device's photo gallery
 		});
+
 	});
+
 	
 	//return Camera1;
 	
